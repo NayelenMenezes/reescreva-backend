@@ -1,0 +1,15 @@
+$kind: http-request
+url: http://localhost:8080/api/turmas?turno=NOTURNO&bairro=Centro&onlyActive=true
+method: GET
+queryParams:
+  turno: NOTURNO
+  bairro: Centro
+  onlyActive: "true"
+scripts:
+  - type: afterResponse
+    code: |-
+      pm.test('Status 200 OK', function () {
+          pm.response.to.have.status(200);
+      });
+    language: text/javascript
+order: 3000

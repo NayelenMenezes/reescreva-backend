@@ -1,0 +1,26 @@
+$kind: http-request
+url: http://localhost:8080/api/turmas/{{turma1Id}}
+method: PUT
+headers:
+  Content-Type: application/json
+body:
+  type: text
+  content: |-
+    {
+      "nomeLocal": "Escola Polivalente Atualizada {{$timestamp}}",
+      "bairro": "Centro",
+      "endereco": "Rua Principal, 120 - Bloco B",
+      "turno": "NOTURNO",
+      "vagasTotais": 30,
+      "latitude": -11.3042,
+      "longitude": -41.8558,
+      "ativa": true
+    }
+scripts:
+  - type: afterResponse
+    code: |-
+      pm.test('Status 200 OK', function () {
+          pm.response.to.have.status(200);
+      });
+    language: text/javascript
+order: 5000

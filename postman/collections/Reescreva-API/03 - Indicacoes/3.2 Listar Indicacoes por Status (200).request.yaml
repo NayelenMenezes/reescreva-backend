@@ -1,0 +1,13 @@
+$kind: http-request
+url: http://localhost:8080/api/indicacoes?status=PENDENTE
+method: GET
+queryParams:
+  status: PENDENTE
+scripts:
+  - type: afterResponse
+    code: |-
+      pm.test('Status 200 OK', function () {
+          pm.response.to.have.status(200);
+      });
+    language: text/javascript
+order: 2000

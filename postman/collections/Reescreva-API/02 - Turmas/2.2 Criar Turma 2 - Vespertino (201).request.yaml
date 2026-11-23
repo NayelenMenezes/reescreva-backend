@@ -1,0 +1,27 @@
+$kind: http-request
+url: http://localhost:8080/api/turmas
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: text
+  content: |-
+    {
+      "nomeLocal": "Associacao Comunitaria Norte {{$timestamp}}",
+      "bairro": "Sao Jose",
+      "endereco": "Av. Brasil, 45",
+      "turno": "VESPERTINO",
+      "vagasTotais": 15,
+      "latitude": -11.3100,
+      "longitude": -41.8600
+    }
+scripts:
+  - type: afterResponse
+    code: |-
+      pm.test('Status 201 Created', function () {
+          pm.response.to.have.status(201);
+      });
+      const json = pm.response.json();
+      pm.collectionVariables.set('turma2Id', json.id);
+    language: text/javascript
+order: 2000

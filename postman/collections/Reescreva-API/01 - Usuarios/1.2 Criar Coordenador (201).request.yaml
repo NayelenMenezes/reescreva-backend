@@ -1,0 +1,24 @@
+$kind: http-request
+url: http://localhost:8080/api/usuarios
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: text
+  content: |-
+    {
+      "nomeCompleto": "Ana Coordenadora",
+      "email": "ana.{{$timestamp}}@reescreva.com",
+      "senha": "123456",
+      "perfil": "COORDENADOR"
+    }
+scripts:
+  - type: afterResponse
+    code: |-
+      pm.test('Status 201 Created', function () {
+          pm.response.to.have.status(201);
+      });
+      const json = pm.response.json();
+      pm.collectionVariables.set('userId', json.id);
+    language: text/javascript
+order: 2000

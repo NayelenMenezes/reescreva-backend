@@ -1,0 +1,27 @@
+$kind: http-request
+url: http://localhost:8080/api/turmas
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: text
+  content: |-
+    {
+      "nomeLocal": "Escola Municipal Polivalente {{$timestamp}}",
+      "bairro": "Centro",
+      "endereco": "Rua Principal, 120 - Irece/BA",
+      "turno": "NOTURNO",
+      "vagasTotais": 25,
+      "latitude": -11.3042,
+      "longitude": -41.8558
+    }
+scripts:
+  - type: afterResponse
+    code: |-
+      pm.test('Status 201 Created', function () {
+          pm.response.to.have.status(201);
+      });
+      const json = pm.response.json();
+      pm.collectionVariables.set('turma1Id', json.id);
+    language: text/javascript
+order: 1000

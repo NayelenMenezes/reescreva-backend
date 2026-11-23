@@ -1,0 +1,31 @@
+$kind: http-request
+url: http://localhost:8080/api/indicacoes
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: text
+  content: |-
+    {
+      "nomeInteressado": "Jose Carlos Silva",
+      "telefone": "{{randPhone}}",
+      "idade": 58,
+      "bairroInteressado": "Centro",
+      "quemIndicou": "Filha Carla",
+      "observacoes": "Disponivel a noite"
+    }
+scripts:
+  - type: beforeRequest
+    code: |-
+      const randPhone = '749' + Math.floor(10000000 + Math.random() * 90000000);
+      pm.collectionVariables.set('randPhone', randPhone);
+    language: text/javascript
+  - type: afterResponse
+    code: |-
+      pm.test('Status 201 Created', function () {
+          pm.response.to.have.status(201);
+      });
+      const json = pm.response.json();
+      pm.collectionVariables.set('indicacaoId', json.id);
+    language: text/javascript
+order: 1000

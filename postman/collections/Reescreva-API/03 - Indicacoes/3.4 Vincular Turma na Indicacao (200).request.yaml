@@ -1,0 +1,11 @@
+$kind: http-request
+url: http://localhost:8080/api/indicacoes/{{indicacaoId}}/turma/{{turma1Id}}
+method: PATCH
+scripts:
+  - type: afterResponse
+    code: |-
+      pm.test('Status 200 OK', function () {
+          pm.response.to.have.status(200);
+      });
+    language: text/javascript
+order: 4000

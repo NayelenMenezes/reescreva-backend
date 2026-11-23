@@ -1,0 +1,13 @@
+# Use this workspace to collaborate
+workspace:
+  id: 4b0b9841-4991-424b-8573-319a2947fe13
+
+cloudResources:
+  collections:
+    ../postman/collections/Reescreva API - Entrega 3: 712454a8-120e-42cc-adaf-07d6f0b60c45
+
+# All resources in the `postman/` folder are automatically registered in Local View.
+# Point to additional files outside the `postman/` folder to register them individually. Example:
+#localResources:
+#  collections:
+#    - ../tests/E2E Test Collection/

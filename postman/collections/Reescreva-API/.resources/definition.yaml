@@ -1,0 +1,8 @@
+$kind: collection
+description: Suite automatizada cobrindo todos os endpoints de Usuario, Turma, Indicacao e regras de negocio.
+variables:
+  userId: ""
+  turma1Id: ""
+  turma2Id: ""
+  randPhone: ""
+  indicacaoId: ""

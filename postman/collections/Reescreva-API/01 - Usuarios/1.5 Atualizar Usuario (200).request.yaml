@@ -1,0 +1,23 @@
+$kind: http-request
+url: http://localhost:8080/api/usuarios/{{userId}}
+method: PUT
+headers:
+  Content-Type: application/json
+body:
+  type: text
+  content: |-
+    {
+      "nomeCompleto": "Ana Souza Atualizada",
+      "email": "ana.atualizada.{{$timestamp}}@reescreva.com",
+      "senha": "123456",
+      "perfil": "COORDENADOR",
+      "status": "ATIVO"
+    }
+scripts:
+  - type: afterResponse
+    code: |-
+      pm.test('Status 200 OK', function () {
+          pm.response.to.have.status(200);
+      });
+    language: text/javascript
+order: 5000
